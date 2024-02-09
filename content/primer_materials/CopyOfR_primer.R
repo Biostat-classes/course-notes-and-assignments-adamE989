@@ -144,6 +144,7 @@ x
 x <- matrix(c(2, 2, 2, 2), 2, 2)
 class(x)
 x
+(2+2) *2
 
 #now x and a matrix. note we've named x three times, and thus replaced it!  
 

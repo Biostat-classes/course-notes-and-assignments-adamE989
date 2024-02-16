@@ -8,6 +8,10 @@ editor:
 
 <!-- COMMENT NOT SHOW IN ANY OUTPUT: Code chunk below sets overall defaults for .qmd file; these inlcude showing output by default and looking for files relative to .Rpoj file, not .qmd file, which makes putting filesin different folders easier  -->
 
+```{r}
+x <- 5:15
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
@@ -122,9 +126,9 @@ What does it return?
 
 Determine what the ":" does! Complete the following sentence:
 
-The : means FILL THIS
+The colon displays a sequence of numbers between two numbers
 
-#### 2
+2
 
 Now try to guess the output of these commands
 
@@ -138,10 +142,60 @@ INSERT AN R CHUNK HERE AND RUN EACH OF THESE COMMANDS. Add a new chunk
 by clicking the *Insert Chunk* button on the toolbar or by pressing
 *Ctrl+Alt+I*. Then state what each of these does.
 
+```{r}
+length(x)
+```
+
+Displays how long a sequence between two numbers is
+
+```{r}
+max(x)
+```
+
+Displays the greatest number in a sequence
+
+```{r}
+x[x < 10]
+```
+
+Displays all numbers in the sequence that are less than 10
+
+```{r}
+x^2
+```
+
+Raises all numbers in the sequence to the second power
+
+```{r}
+x[ x < 12 & x > 7]
+```
+
+Displays all numbers in the sequence that are greater than 7 and less
+than 12
+
 #### 3
 
 Is `-1:2` the same as `(-1):2` or `-(1:2)`? INSERT AN R CHUNK HERE AND
 RUN EACH OF THESE COMMANDS. Then state what each of these does.
+
+```{r}
+-1:2
+```
+
+Sequence of numbers from -1 to 2
+
+```{r}
+(-1):2
+```
+
+Sequence of numbers from -1 to 2
+
+```{r}
+-(1:2)
+
+```
+
+Makes numbers in the parenthesis negative
 
 ### Data input, plotting, and tests
 
@@ -157,17 +211,31 @@ environment.
 Info on the dataset is viewable \@
 <http://www.statsci.org/data/general/sleep.html>.
 
+```{r}
+dimnames.data.frame(sleep)
+```
+
 #### 4
 
-How many rows does the **sleep** data set have (hint: `?dim`)? What kind
+How many rows does the **sleep** data set have (hint: `dim`? What kind
 of data is stored in each variable?
 
+```{r}
+dimnames.data.frame(sleep)
+```
+
 ENTER ANSWERS HERE. ADD ANY R CHUNKS YOU USED TO FIND THE ANSWER.
+
+62 rows
 
 #### 5
 
 Change the column named *BodyWt* to *Body_weight*"\* in the sleep
 dataset.
+
+```{r}
+names(sleep)[names(sleep) %in% "BodtWt"]<- "Body_Weight"
+```
 
 ADD ANY R CHUNKS YOU USED TO COMPLETE THE TASK.
 
@@ -207,6 +275,10 @@ NOTE YOU CAN ADD A PLOT TO THE DOCUMENT TOO! AMEND THE BELOW AS NEEDED.
 plot(cars)
 ```
 
+```{r}
+plot(TotalSleep ~ Primate, sleep)
+```
+
 #### 7
 
 The **sleep** dataset begs to have a linear model fit for it. Let's
@@ -214,6 +286,17 @@ consider. First plot how *TotalSleep* is explained by *BrainWt*. Are
 there any issues with the data? Exclude any outlier and fit a linear
 model to obtain the p-value for the model (hint: summary()). What does
 this imply?
+
+```{r}
+plot(TotalSleep ~ BrainWt, sleep)
+```
+
+```{r}
+sleep_fit <- lm(TotalSleep ~ BrainWt, sleep[sleep$BrainWt<1000,])
+summary(sleep_fit)
+```
+
+According to the graph, as brain weight increases, total sleep decreases
 
 ENTER ANSWERS HERE. ADD ANY R CHUNKS YOU USED TO FIND THE ANSWER.
 

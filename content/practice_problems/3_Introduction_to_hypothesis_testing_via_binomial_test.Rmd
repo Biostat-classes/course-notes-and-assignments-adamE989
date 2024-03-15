@@ -92,8 +92,8 @@ An alternative hypothesis is that there is a statistically significant
 difference between the two
 
 ```{r}
-sampling_experiment = rbinom(10000, 25, .5)
-ggplot(sampling_experiment, aes(x=Number_righteared)) +
+sampling_experiment = data.frame(sucess=rbinom(10000, 25, .5))
+ggplot(sampling_experiment, aes(x=sucess)) +
   geom_histogram()
 ```
 
@@ -107,9 +107,7 @@ binom.test(x=19, 25, p=0.5)
 
 ```
 
-```{r}
-sampling_experiment = rbinom(10000, 25, .5)
-hist(sampling_experiment, breaks = 0:25, xlab = "# of Right-eared people out of 25", ylab = "Probability of being drawn \n from population of p = 0.5")
+```         
 ```
 
 ```{r}
@@ -133,7 +131,7 @@ the students helped the dog?
 **MAKE SURE TO THINK ABOUT YOUR TEST OPTIONS**
 
 ```{r}
-binom.test(x=33, n=100, p=0.25)
+binom.test(x=33, n=100, p=0.25, alternative = "greater")
 ```
 
 p-value is less than 0.05, so we reject the null

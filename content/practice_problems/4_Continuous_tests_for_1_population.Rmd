@@ -197,6 +197,25 @@ g. Test the hypothesis that µ = 205 \* Assuming variance = 1500 \*
 Estimating the variance from the data \* Using rank transform analysis
 \* Using binary transform analysis
 
+```{r}
+strawberry <- c(239, 176, 235, 217, 234, 216, 318, 190, 181,225) 
+
+z.test(x=strawberry, mu=205, sigma.x = sqrt(1500))
+```
+
+rank test
+
+```{r}
+strawberry <- c(239, 176, 235, 217, 234, 216, 318, 190, 181,225) 
+wilcox.test(x=strawberry, mu=205 )
+```
+
+sign test
+
+```{r}
+SIGN.test(x=strawberry, mu=20)
+```
+
 ```         
 ```
 
@@ -209,6 +228,18 @@ obtained from such nests and they yield 25 females and 5 males. Test the
 hypotheses that that: \* a) the sex ratio is 50% females \* b) the sex
 ratio is 80% females.
 
+Here, we fail to reject the null
+
+```{r}
+binom.test(25, 30, p=0.8)
+```
+
+Here, we reject the null
+
+```{r}
+binom.test(25, 30, p=0.5)
+```
+
 #### 6
 
 Studies of flying snakes have led researchers to posit the mean
@@ -218,6 +249,14 @@ the paradise tree snake undulation rates and choose and justify a test
 you can use to assess the data.
 
 Undulation rates (in Hz): 0.9, 1.4, 1.2, 1.2, 1.3, 2.0, 1.4, 1.6
+
+T test, as variance is not given
+
+```{r}
+Rates<- c(0.9, 1.4, 1.2, 1.2, 1.3, 2.0, 1.4, 1.6)
+
+t.test(x=Rates, mu=1.4)
+```
 
 #### 7
 
@@ -230,4 +269,11 @@ techniques. Data at
 ```{r}
 sport <- read.table("http://www.statsci.org/data/oz/ais.txt", header = T, 
                     stringsAsFactors = T)
+```
+
+```{r}
+boot.t.test(sport[sport$Sex == "male", "Wt"], mu= 85.9)
+```
+
+```         
 ```
